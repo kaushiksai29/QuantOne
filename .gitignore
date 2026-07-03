@@ -9,3 +9,4 @@ tmp_*/
 model_hashes.json
 *.zip
 *.log
+charts/

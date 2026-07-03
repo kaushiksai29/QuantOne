@@ -1,4 +1,126 @@
 <!doctype html>
-<!-- Static HF Space leaderboard reading summary.json. Implemented in Phase 5. -->
-<html><head><meta charset="utf-8"><title>QuantOne</title></head>
-<body><p>QuantOne leaderboard — built in Phase 5.</p></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuantOne — quantization vs structured-output reliability</title>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 1100px;
+         padding: 0 1rem; color: #1a1a1a; background: #fff; }
+  h1 { font-size: 1.5rem; } h2 { font-size: 1.15rem; margin-top: 2rem; }
+  .meta { color: #666; font-size: 0.85rem; margin-bottom: 1rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #ddd; text-align: left; }
+  th { cursor: pointer; user-select: none; background: #f5f5f5; white-space: nowrap; }
+  th:hover { background: #e8e8e8; }
+  th .arrow { font-size: 0.7rem; color: #888; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .ci { color: #777; font-size: 0.8rem; }
+  .sig-down { background: #fdecea; }   /* significant regression */
+  .sig-up { background: #eaf7ed; }     /* significant improvement */
+  .badge { font-size: 0.75rem; padding: 0.05rem 0.4rem; border-radius: 8px;
+           background: #c62828; color: #fff; }
+  .badge.up { background: #2e7d32; }
+  #picker { border: 2px dashed #bbb; padding: 1.5rem; text-align: center;
+            border-radius: 8px; color: #666; display: none; }
+  a { color: #0b57d0; }
+</style>
+</head>
+<body>
+<h1>QuantOne — does quantization break structured output?</h1>
+<p>5 models × 4 quant levels × 500 machine-checkable tasks × 3 seeds, scored
+deterministically (no LLM judges). Differences are flagged significant only when
+the paired-bootstrap 95% CI excludes zero.
+<a href="https://github.com/kaushiksai29/QuantOne">Code</a> ·
+<a href="https://github.com/kaushiksai29/QuantOne#readme">Method</a></p>
+<div class="meta" id="meta"></div>
+
+<div id="picker">
+  Couldn't load <code>summary.json</code> automatically (opening this page as a
+  local file blocks fetch in some browsers).<br><br>
+  <input type="file" id="file" accept=".json"> — pick your
+  <code>summary/summary.json</code>
+</div>
+
+<div id="content" style="display:none">
+  <h2>Deltas vs baseline <span id="baseline"></span></h2>
+  <table id="deltas"></table>
+  <h2>Raw means</h2>
+  <table id="cells"></table>
+</div>
+
+<script>
+"use strict";
+const QUANT_ORDER = {FP16: 0, Q8_0: 1, Q4_K_M: 2, Q3_K_M: 3};
+const fmt = x => (typeof x === "number" ? x.toFixed(3) : x);
+
+function sortable(table, rows, columns, render) {
+  let sortKey = null, dir = 1;
+  function draw() {
+    const head = "<tr>" + columns.map(c =>
+      `<th data-k="${c.key}">${c.label} <span class="arrow">${
+        sortKey === c.key ? (dir > 0 ? "▲" : "▼") : "↕"}</span></th>`).join("") + "</tr>";
+    table.innerHTML = head + rows.map(render).join("");
+    table.querySelectorAll("th").forEach(th => th.onclick = () => {
+      const k = th.dataset.k;
+      dir = (sortKey === k) ? -dir : 1;
+      sortKey = k;
+      rows.sort((a, b) => {
+        let va = a[k], vb = b[k];
+        if (k === "quant") { va = QUANT_ORDER[va] ?? 9; vb = QUANT_ORDER[vb] ?? 9; }
+        return (va < vb ? -1 : va > vb ? 1 : 0) * dir;
+      });
+      draw();
+    });
+  }
+  draw();
+}
+
+function show(summary) {
+  document.getElementById("picker").style.display = "none";
+  document.getElementById("content").style.display = "";
+  const m = summary.meta;
+  document.getElementById("meta").textContent =
+    `baseline ${m.baseline} · ${m.n_boot.toLocaleString()} bootstrap resamples · ` +
+    `pipeline v${m.pipeline_version} · generated ${m.generated_at}`;
+  document.getElementById("baseline").textContent = m.baseline;
+
+  sortable(document.getElementById("deltas"), summary.deltas.slice(), [
+    {key: "model", label: "model"}, {key: "metric", label: "metric"},
+    {key: "quant", label: "quant"}, {key: "delta", label: "Δ vs baseline"},
+    {key: "ci_lo", label: "95% CI"}, {key: "n_prompts", label: "n"},
+    {key: "significant", label: "significant"},
+  ], d => {
+    const cls = d.significant ? (d.delta < 0 ? "sig-down" : "sig-up") : "";
+    const badge = d.significant
+      ? `<span class="badge ${d.delta > 0 ? "up" : ""}">${d.delta > 0 ? "better" : "worse"}</span>`
+      : "—";
+    return `<tr class="${cls}"><td>${d.model}</td><td>${d.metric}</td>` +
+      `<td>${d.quant}</td><td class="num">${fmt(d.delta)}</td>` +
+      `<td class="num ci">[${fmt(d.ci_lo)}, ${fmt(d.ci_hi)}]</td>` +
+      `<td class="num">${d.n_prompts}</td><td>${badge}</td></tr>`;
+  });
+
+  sortable(document.getElementById("cells"), summary.cells.slice(), [
+    {key: "model", label: "model"}, {key: "metric", label: "metric"},
+    {key: "quant", label: "quant"}, {key: "mean", label: "mean"},
+    {key: "n_prompts", label: "n"},
+  ], c => `<tr><td>${c.model}</td><td>${c.metric}</td><td>${c.quant}</td>` +
+    `<td class="num">${fmt(c.mean)}</td><td class="num">${c.n_prompts}</td></tr>`);
+}
+
+fetch("summary.json")
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(show)
+  .catch(() => {
+    const picker = document.getElementById("picker");
+    picker.style.display = "block";
+    document.getElementById("file").onchange = ev => {
+      const f = ev.target.files[0];
+      if (f) f.text().then(t => show(JSON.parse(t)));
+    };
+  });
+</script>
+</body>
+</html>

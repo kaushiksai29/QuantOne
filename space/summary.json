@@ -1,0 +1,63 @@
+{
+  "cells": [
+    {
+      "mean": 0.8,
+      "metric": "json_parse_rate",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q4_K_M"
+    },
+    {
+      "mean": 0.15,
+      "metric": "schema_compliance",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q4_K_M"
+    },
+    {
+      "mean": 1.0,
+      "metric": "json_parse_rate",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q8_0"
+    },
+    {
+      "mean": 0.25,
+      "metric": "schema_compliance",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q8_0"
+    }
+  ],
+  "deltas": [
+    {
+      "baseline": "Q8_0",
+      "ci_hi": -0.05,
+      "ci_lo": -0.4,
+      "delta": -0.2,
+      "metric": "json_parse_rate",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q4_K_M",
+      "significant": true
+    },
+    {
+      "baseline": "Q8_0",
+      "ci_hi": 0.0,
+      "ci_lo": -0.25,
+      "delta": -0.1,
+      "metric": "schema_compliance",
+      "model": "smoke",
+      "n_prompts": 20,
+      "quant": "Q4_K_M",
+      "significant": false
+    }
+  ],
+  "meta": {
+    "baseline": "Q8_0",
+    "bootstrap_seed": 12345,
+    "generated_at": "2026-07-02T16:42:14.954243+00:00",
+    "n_boot": 10000,
+    "pipeline_version": 1
+  }
+}
