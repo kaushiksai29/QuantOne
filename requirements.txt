@@ -1,0 +1,11 @@
+# Pinned to a version with prebuilt CPU wheels for win_amd64 + linux_x86_64 on
+# https://abetlen.github.io/llama-cpp-python/whl/cpu (install with that
+# --extra-index-url on CPU; Kaggle T4 installs may build with CUDA instead).
+llama-cpp-python==0.3.19
+pydantic==2.11.5
+jsonschema==4.24.0
+pandas==2.2.3
+pyarrow==20.0.0
+matplotlib==3.10.3
+pytest==8.4.0
+PyYAML==6.0.2

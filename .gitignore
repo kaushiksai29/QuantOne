@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+models/
+results/
+scores/
+summary/
+tmp_*/
+model_hashes.json
+*.zip
+*.log

@@ -1,0 +1,5 @@
+# Byte-for-byte reproducibility (tasks.jsonl, results) requires LF everywhere.
+* text=auto eol=lf
+*.gguf binary
+*.parquet binary
+*.png binary

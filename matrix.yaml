@@ -1,0 +1,130 @@
+# QuantOne experiment matrix — FROZEN CONFIG (CLAUDE.md rule 3).
+# Changing gen_config or model files invalidates all results; bump
+# pipeline_version and rerun everything if a change is truly needed.
+#
+# sha256 values are the official LFS hashes from the Hugging Face API,
+# recorded 2026-07-02 before any real run (rule 5).
+# chat_template: null = use the chat template embedded in the GGUF
+# (llama-cpp-python chat_format=None); a string = llama-cpp built-in format.
+
+pipeline_version: 1
+
+quants: [FP16, Q8_0, Q4_K_M, Q3_K_M]
+
+# Frozen generation config, applied to every run.
+gen_config:
+  temperature: 0
+  max_tokens: 512
+  seed: null          # set per-run by the runner (seeds 0, 1, 2)
+
+seeds: 3
+
+# Smoke model for local CPU end-to-end tests (not part of the 5-model matrix).
+smoke:
+  model_id: Qwen/Qwen2.5-0.5B-Instruct-GGUF
+  family: qwen
+  chat_template: chatml
+  context_length: 32768
+  files:
+    Q8_0:
+      gguf_url: https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q8_0.gguf
+      sha256: ca59ca7f13d0e15a8cfa77bd17e65d24f6844b554a7b6c12e07a5f89ff76844e
+    Q4_K_M:
+      gguf_url: https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf
+      sha256: 74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db
+
+models:
+  llama32_3b:
+    model_id: unsloth/Llama-3.2-3B-Instruct-GGUF
+    family: llama
+    chat_template: null
+    context_length: 131072
+    files:
+      FP16:
+        gguf_url: https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-F16.gguf
+        sha256: db0ebda07c65c6cc6d15fb1c28f0f401fe64003aa88cfbf701be58a1c4122d54
+      Q8_0:
+        gguf_url: https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-Q8_0.gguf
+        sha256: f34112a11b7dad74ab517dedf6dcf00d624c9adac2dc0c72c719ca0478554ef2
+      Q4_K_M:
+        gguf_url: https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-Q4_K_M.gguf
+        sha256: 6c99cc00ae910f6a532a80022cb4bc1939094527a089c29294b841c0bd87f74d
+      Q3_K_M:
+        gguf_url: https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-Q3_K_M.gguf
+        sha256: aa48f1dfafebc0bd0631ffff625804e3641f5e61e8c91c465a556195fbd80376
+
+  qwen25_3b:
+    model_id: bartowski/Qwen2.5-3B-Instruct-GGUF
+    family: qwen
+    chat_template: null
+    context_length: 32768
+    files:
+      FP16:
+        gguf_url: https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-f16.gguf
+        sha256: 25908e409af8c952a17c8fda44b90e699565a90436431574f44c25d140aa5032
+      Q8_0:
+        gguf_url: https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q8_0.gguf
+        sha256: 12491ec9f03aab7f0b96cdb7742695e6583d17ee129de48332d04b9cf6acd960
+      Q4_K_M:
+        gguf_url: https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
+        sha256: 9c9f56a391a3abbd5b89d0245bf6106081bcc3173119d4229235dd9d23253f94
+      Q3_K_M:
+        gguf_url: https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q3_K_M.gguf
+        sha256: 8eff4e0eb51a8148abdaa9849f14f187e5ac6cd7d795610caf996a287277c59d
+
+  gemma2_2b:
+    model_id: second-state/gemma-2-2b-it-GGUF
+    family: gemma
+    chat_template: null
+    context_length: 8192
+    files:
+      FP16:
+        gguf_url: https://huggingface.co/second-state/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it-f16.gguf
+        sha256: 7edd84a0e2c29598c2baa87b3bd9a8687463498a9f31696484beefad03208e57
+      Q8_0:
+        gguf_url: https://huggingface.co/second-state/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it-Q8_0.gguf
+        sha256: e943e00b329d9d23133850e45d8fea9d8bb36c28754c61dbbb288f51e86efe78
+      Q4_K_M:
+        gguf_url: https://huggingface.co/second-state/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it-Q4_K_M.gguf
+        sha256: 095fa40e244c71591335129da2fa5270912ba156d566b0c28fd6bb5e3e2181fb
+      Q3_K_M:
+        gguf_url: https://huggingface.co/second-state/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it-Q3_K_M.gguf
+        sha256: dc62f8179754a635d098a502cc8d8bc62a1bf98e0db53c37e253d0983e830d49
+
+  phi35_mini:
+    model_id: second-state/Phi-3.5-mini-instruct-GGUF
+    family: phi
+    chat_template: null
+    context_length: 131072
+    files:
+      FP16:
+        gguf_url: https://huggingface.co/second-state/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-f16.gguf
+        sha256: 04381ade8b69632b564f1dbc473dac52f7819349ceb3cc76d268dee91f762fe2
+      Q8_0:
+        gguf_url: https://huggingface.co/second-state/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q8_0.gguf
+        sha256: 81fd0b829a6ff15b3df3cc792de3f3e75a9fb2f1f55c0059af55a698b1173150
+      Q4_K_M:
+        gguf_url: https://huggingface.co/second-state/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q4_K_M.gguf
+        sha256: c389ea28dc7f10dfbe30fc5e05452f832b1adf85989253ba590e3620b9584f06
+      Q3_K_M:
+        gguf_url: https://huggingface.co/second-state/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q3_K_M.gguf
+        sha256: e090e1ea535e89f4f18737dbf1c79bb5a168990159e9d8a6174374fe921096ca
+
+  smollm2_17b:
+    model_id: bartowski/SmolLM2-1.7B-Instruct-GGUF
+    family: smollm
+    chat_template: null
+    context_length: 8192
+    files:
+      FP16:
+        gguf_url: https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF/resolve/main/SmolLM2-1.7B-Instruct-f16.gguf
+        sha256: cf3f0569a9d0b56d5d3b5b7944768c71bd2fef789f8b36b1b85a05d390850852
+      Q8_0:
+        gguf_url: https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF/resolve/main/SmolLM2-1.7B-Instruct-Q8_0.gguf
+        sha256: 0c6e8955788b1253f418c354a4bdc4cf507b8cfe49c48bb10c7c58ae713cfa2a
+      Q4_K_M:
+        gguf_url: https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF/resolve/main/SmolLM2-1.7B-Instruct-Q4_K_M.gguf
+        sha256: 77665ea4815999596525c636fbeb56ba8b080b46ae85efef4f0d986a139834d7
+      Q3_K_M:
+        gguf_url: https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF/resolve/main/SmolLM2-1.7B-Instruct-Q3_K_M.gguf
+        sha256: 697f05c62479fc35d0241bb1208763e8e6c24fd6efafe38d6f7d379af7f42a91
