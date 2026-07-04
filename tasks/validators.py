@@ -21,12 +21,42 @@ def strip_code_fence(text):
     return m.group(1) if m else text
 
 
+_DECODER = json.JSONDecoder()
+
+
+def _first_json_value(text):
+    """Return the first complete JSON object/array in `text` (via raw_decode,
+    which correctly respects string literals and nesting), or raise. Trailing
+    commentary after the value is ignored — this is what makes scoring robust
+    to models that emit the answer and then keep talking."""
+    for i, ch in enumerate(text):
+        if ch in "{[":
+            try:
+                value, _ = _DECODER.raw_decode(text, i)
+                return value
+            except json.JSONDecodeError:
+                continue
+    raise json.JSONDecodeError("no JSON value found", text, 0)
+
+
 def try_parse_json(raw_output):
-    """Returns (parsed_ok, value). parsed_ok is True iff the (fence-stripped)
-    output is a single valid JSON document."""
+    """Returns (parsed_ok, value). First tries the whole (fence-stripped)
+    output as one JSON document; if that fails, falls back to the FIRST
+    complete JSON value in the output. Both paths are deterministic. The
+    fallback measures usable structured output (correct JSON possibly followed
+    by commentary) rather than strict "nothing but JSON" instruction-following;
+    it is what keeps a rambling model from being scored as a total failure and,
+    crucially, keeps a quant-correlated rambling rate from faking deltas."""
+    if not isinstance(raw_output, str):
+        return False, None
+    text = strip_code_fence(raw_output)
     try:
-        return True, json.loads(strip_code_fence(raw_output))
-    except (json.JSONDecodeError, TypeError):
+        return True, json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    try:
+        return True, _first_json_value(text)
+    except json.JSONDecodeError:
         return False, None
 
 

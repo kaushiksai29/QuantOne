@@ -26,14 +26,18 @@ STRUCT_GOOD = [
     '{"status": "active", "count": 3, "due_date": "2026-07-02"}',
     '{"status": "inactive", "count": 0, "due_date": "2025-01-31"}',
     '```json\n{"status": "active", "count": 10, "due_date": "2026-12-25"}\n```',
+    # lenient: leading prose then valid JSON is usable output -> passes
+    'Sure! Here is the JSON: {"status": "active", "count": 3, "due_date": "2026-07-02"}',
+    # lenient: valid JSON then trailing commentary (the phi rambling pattern)
+    '{"status": "active", "count": 3, "due_date": "2026-07-02"}\n\nNote: hope this helps!',
 ]
 
 STRUCT_BAD = [
-    '{"status": "active", "count": 3',                                # truncated JSON
+    '{"status": "active", "count": 3',                                # unclosed JSON
     '{"status": "paused", "count": 3, "due_date": "2026-07-02"}',     # enum violation
     '{"status": "active", "count": 99, "due_date": "2026-07-02"}',    # range violation
     '{"status": "active", "count": 3, "due_date": "July 2, 2026"}',   # date pattern
-    'Sure! Here is the JSON: {"status": "active", "count": 3, "due_date": "2026-07-02"}',
+    'I could not produce that.',                                      # no JSON at all
 ]
 
 
@@ -52,6 +56,16 @@ def test_structured_bad(output):
 def test_structured_parses_but_noncompliant():
     r = VALIDATORS["structured_output"].validate('{"wrong": 1}', STRUCT_TASK)
     assert r == {"json_parses": True, "schema_complies": False}
+
+
+def test_lenient_first_object_wins_and_respects_braces_in_strings():
+    # trailing junk after a valid object is ignored...
+    from tasks.validators import try_parse_json
+    ok, val = try_parse_json('{"a": "has } brace"} then garbage {"b": 2}')
+    assert ok and val == {"a": "has } brace"}
+    # ...but an unclosed object is not silently recovered
+    ok2, _ = try_parse_json('{"a": "unterminated')
+    assert not ok2
 
 
 # ---------------------------------------------------------------------------
