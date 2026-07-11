@@ -1,0 +1,399 @@
+{
+  "generated": "2026-07-10",
+  "llama_cpp_python": "0.3.33",
+  "models": {
+    "gemma4_26b_a4b": {
+      "arms": [
+        "qat"
+      ],
+      "base_model": "google/gemma-4-26B-A4B-it",
+      "files": {
+        "IQ3_M": {
+          "gb": 13.28,
+          "path": "google_gemma-4-26B-A4B-it-IQ3_M.gguf",
+          "sha256": "ed5c2f59601db91c7865f035c05e5cde08273ea10a7f15c42f9a15fc7d914e5f"
+        },
+        "IQ4_XS": {
+          "gb": 14.21,
+          "path": "google_gemma-4-26B-A4B-it-IQ4_XS.gguf",
+          "sha256": "15bdec0662a3788521ead34b29cdb092455f7fa7726f5c111d02d4834efdda42"
+        },
+        "Q3_K_M": {
+          "gb": 13.02,
+          "path": "google_gemma-4-26B-A4B-it-Q3_K_M.gguf",
+          "sha256": "066c5272cf231c2df7f5a4d9589569a21cb30d0dcfb6a16c520cf3ce99232a7e"
+        },
+        "Q4_K_M": {
+          "gb": 17.04,
+          "path": "google_gemma-4-26B-A4B-it-Q4_K_M.gguf",
+          "sha256": "e718536fe9b4bd505b07d44ded8f1595053a5d5407315bccf555ce592f33c140"
+        },
+        "Q8_0": [
+          {
+            "gb": 26.86,
+            "path": "google_gemma-4-26B-A4B-it-Q8_0.gguf",
+            "sha256": "c077c33e10934288fbc4d80b1f953069e11817cbdfcc1dfe1532d3574307efde"
+          },
+          {
+            "gb": 0.46,
+            "path": "mtp-google_gemma-4-26B-A4B-it-Q8_0.gguf",
+            "sha256": "498a7b04c2d8df4d98c679945ad52f1718d1150b42a672a3ac64962dc76a287e"
+          }
+        ]
+      },
+      "gguf_repo": "bartowski/google_gemma-4-26B-A4B-it-GGUF",
+      "notes": "MoE (A4B): measure real memory in Phase 0 GPU probe",
+      "qat": {
+        "gb": 14.44,
+        "path": "gemma-4-26B_q4_0-it.gguf",
+        "repo": "google/gemma-4-26B-A4B-it-qat-q4_0-gguf",
+        "revision": "21bfe2a8c89118c9a1a2aa242934fc4d1c0fff15",
+        "sha256": "4c856523d61d77922dbc0b26753a6bf6208e5d69d80db0c04dcd776832d054c5"
+      },
+      "quant_gaps": {},
+      "revision": "fabed3e586120477355eea23b92644540a79ce2f",
+      "thinking_off": "n/a",
+      "tier": "big"
+    },
+    "gemma4_e4b": {
+      "arms": [
+        "kv",
+        "qat"
+      ],
+      "base_model": "google/gemma-4-E4B-it",
+      "files": {
+        "FP16": {
+          "gb": 15.05,
+          "path": "google_gemma-4-E4B-it-bf16.gguf",
+          "sha256": "9bec68061a7aad29691ba9ee0171ea67e41b6152609c9e20d732d1916219275c"
+        },
+        "IQ3_M": {
+          "gb": 4.77,
+          "path": "google_gemma-4-E4B-it-IQ3_M.gguf",
+          "sha256": "5df4c5efa6546270b3daaf0970822602f3ab71269df7c02c9c12da1a2beb240b"
+        },
+        "IQ4_XS": {
+          "gb": 5.11,
+          "path": "google_gemma-4-E4B-it-IQ4_XS.gguf",
+          "sha256": "426e5203bbb3266a9973acbb7eb153395a052ca68b1c6309292e42f40cf2d5b5"
+        },
+        "Q3_K_M": {
+          "gb": 4.9,
+          "path": "google_gemma-4-E4B-it-Q3_K_M.gguf",
+          "sha256": "38b84ff3b38d8f260d76a613187a33e649dc6633ff96c4a86d79aeb6b49782a2"
+        },
+        "Q4_K_M": {
+          "gb": 5.41,
+          "path": "google_gemma-4-E4B-it-Q4_K_M.gguf",
+          "sha256": "51865750adafd22de56994a343d5a887cc1a589b9bae41d62b748c8bd0ca9c76"
+        },
+        "Q8_0": {
+          "gb": 8.03,
+          "path": "google_gemma-4-E4B-it-Q8_0.gguf",
+          "sha256": "faa6c725ae2606d05d899783cf9a657e59714b42a7c72e5adae67d2d57f82543"
+        }
+      },
+      "gguf_repo": "bartowski/google_gemma-4-E4B-it-GGUF",
+      "notes": "",
+      "qat": {
+        "gb": 5.15,
+        "path": "gemma-4-E4B_q4_0-it.gguf",
+        "repo": "google/gemma-4-E4B-it-qat-q4_0-gguf",
+        "revision": "7edc6763a77bbca236126a361613b834c5ea0f7a",
+        "sha256": "e8b6a059ba86947a44ace84d6e5679795bc41862c25c30513142588f0e9dba1d"
+      },
+      "quant_gaps": {},
+      "revision": "c04cb322fd63e347db759a08b6249b867488ccf8",
+      "thinking_off": "n/a (no thinking mode) \u2014 verified in local probe",
+      "tier": "small"
+    },
+    "llama32_3b": {
+      "arms": [],
+      "base_model": "meta-llama/Llama-3.2-3B-Instruct",
+      "files": {
+        "FP16": {
+          "gb": 6.43,
+          "path": "Llama-3.2-3B-Instruct-F16.gguf",
+          "sha256": "db0ebda07c65c6cc6d15fb1c28f0f401fe64003aa88cfbf701be58a1c4122d54"
+        },
+        "IQ4_XS": {
+          "gb": 1.83,
+          "path": "Llama-3.2-3B-Instruct-IQ4_XS.gguf",
+          "sha256": "6fca4bfe9ebadd5a4971c8e42b9aae3ec23d7750c95647b797b8803182eab494"
+        },
+        "Q3_K_M": {
+          "gb": 1.69,
+          "path": "Llama-3.2-3B-Instruct-Q3_K_M.gguf",
+          "sha256": "aa48f1dfafebc0bd0631ffff625804e3641f5e61e8c91c465a556195fbd80376"
+        },
+        "Q4_K_M": {
+          "gb": 2.02,
+          "path": "Llama-3.2-3B-Instruct-Q4_K_M.gguf",
+          "sha256": "6c99cc00ae910f6a532a80022cb4bc1939094527a089c29294b841c0bd87f74d"
+        },
+        "Q8_0": {
+          "gb": 3.42,
+          "path": "Llama-3.2-3B-Instruct-Q8_0.gguf",
+          "sha256": "f34112a11b7dad74ab517dedf6dcf00d624c9adac2dc0c72c719ca0478554ef2"
+        }
+      },
+      "gguf_repo": "unsloth/Llama-3.2-3B-Instruct-GGUF",
+      "notes": "",
+      "quant_gaps": {
+        "IQ3_M": "v1-anchor repo (unsloth) has no IQ3_M; switching repos would break the drift control"
+      },
+      "revision": "e7d0997e49c9cb00d88b4c1a6a16aa894b0bbc31",
+      "thinking_off": "n/a",
+      "tier": "small"
+    },
+    "ministral3_3b": {
+      "arms": [],
+      "base_model": "mistralai/Ministral-3-3B-Instruct-2512",
+      "files": {
+        "FP16": {
+          "gb": 6.87,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-bf16.gguf",
+          "sha256": "45e5f1979ac304940d0f7a3dbb5640c491dcc8e8f85a0149359af83942b5f04e"
+        },
+        "IQ3_M": {
+          "gb": 1.7,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-IQ3_M.gguf",
+          "sha256": "5c6da4ea0534edc461c6126e85b5f7e2e1fff75923086e9be95998ca55f2fb98"
+        },
+        "IQ4_XS": {
+          "gb": 1.96,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-IQ4_XS.gguf",
+          "sha256": "0b5576e556c54bccdf253d5019a5a4d7a7fb755fe50c052c6f59c7d06e03b7e4"
+        },
+        "Q3_K_M": {
+          "gb": 1.8,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-Q3_K_M.gguf",
+          "sha256": "da25c9b127b69d5aa2a2cafefaf4f4d691264646814e4f1bfad0ca2b71f02f08"
+        },
+        "Q4_K_M": {
+          "gb": 2.15,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
+          "sha256": "fec9d28c7f8dab7c6857d54b56c8264cce57d6f6d9003bd4110f6457f071c65a"
+        },
+        "Q8_0": {
+          "gb": 3.65,
+          "path": "mistralai_Ministral-3-3B-Instruct-2512-Q8_0.gguf",
+          "sha256": "28d3ed224a1dc2995f3ca2a2414dbbbeddf17a5796efe7d3bfa588ddc81d9957"
+        }
+      },
+      "gguf_repo": "bartowski/mistralai_Ministral-3-3B-Instruct-2512-GGUF",
+      "notes": "",
+      "quant_gaps": {},
+      "revision": "0a9035302dea19872c96076896304552890a73c2",
+      "thinking_off": "n/a (no thinking mode) \u2014 verified in local probe",
+      "tier": "small"
+    },
+    "phi4_mini": {
+      "arms": [],
+      "base_model": "microsoft/Phi-4-mini-instruct",
+      "files": {
+        "FP16": {
+          "gb": 7.68,
+          "path": "Phi-4-mini-instruct.BF16.gguf",
+          "sha256": "1a179f22f1efe409c6517805400c4f07f93fe1f5783e47231d35f933565dff20"
+        },
+        "Q3_K_M": {
+          "gb": 2.12,
+          "path": "Phi-4-mini-instruct-Q3_K_M.gguf",
+          "sha256": "8eb40b196ca664365bb0012eac556e9700345fcf68b41cfc35e8bf4a47687653"
+        },
+        "Q4_K_M": {
+          "gb": 2.49,
+          "path": "Phi-4-mini-instruct-Q4_K_M.gguf",
+          "sha256": "88c00229914083cd112853aab84ed51b87bdf6b9ce42f532d8c85c7c63b1730a"
+        },
+        "Q8_0": {
+          "gb": 4.08,
+          "path": "Phi-4-mini-instruct.Q8_0.gguf",
+          "sha256": "26188c6050d525376a88b04514c236c5e28a36730f1e936f2a00314212b7ba42"
+        }
+      },
+      "gguf_repo": "unsloth/Phi-4-mini-instruct-GGUF",
+      "notes": "",
+      "quant_gaps": {
+        "IQ3_M": "no allowed single-repo source alongside FP16"
+      },
+      "revision": "78eb92a46fc37e6b524df991ed9aca9bc6aa7b80",
+      "thinking_off": "n/a (no thinking mode)",
+      "tier": "small"
+    },
+    "qwen35_2b": {
+      "arms": [],
+      "base_model": "Qwen/Qwen3.5-2B",
+      "files": {
+        "FP16": {
+          "gb": 3.9,
+          "path": "Qwen_Qwen3.5-2B-bf16.gguf",
+          "sha256": "00ce20ce1f469f92a641305b865b01dbbb521fb1241d6ab4892c08e52f518f01"
+        },
+        "IQ3_M": {
+          "gb": 1.19,
+          "path": "Qwen_Qwen3.5-2B-IQ3_M.gguf",
+          "sha256": "17a10e2a91e5169d45b70290b3fa5008ed3e4733d8b0ddc983226d2560cf4c40"
+        },
+        "IQ4_XS": {
+          "gb": 1.26,
+          "path": "Qwen_Qwen3.5-2B-IQ4_XS.gguf",
+          "sha256": "79093b49cad60069a0fbacc55ac7375bc99b7ca68927201daa391f161d5e4be1"
+        },
+        "Q3_K_M": {
+          "gb": 1.22,
+          "path": "Qwen_Qwen3.5-2B-Q3_K_M.gguf",
+          "sha256": "f3a0c4bd6cf01797193b97bb171f08cdc25efdbecd3da2fa2a142a953c78cdcb"
+        },
+        "Q4_K_M": {
+          "gb": 1.4,
+          "path": "Qwen_Qwen3.5-2B-Q4_K_M.gguf",
+          "sha256": "57a1085840f497d764a7fc5d346922dbde961efb54cc792ea81d694fd846a1d8"
+        },
+        "Q8_0": {
+          "gb": 2.08,
+          "path": "Qwen_Qwen3.5-2B-Q8_0.gguf",
+          "sha256": "be647507ce6cde229b838924d47bfff9763171105563f7f908670dae57c4dbe2"
+        }
+      },
+      "gguf_repo": "bartowski/Qwen_Qwen3.5-2B-GGUF",
+      "notes": "",
+      "quant_gaps": {},
+      "revision": "7d26695454df6de5fbcce2e58681e62dae06ce43",
+      "thinking_off": "hybrid thinking model \u2014 mechanism verified in local probe",
+      "tier": "small"
+    },
+    "qwen35_4b": {
+      "arms": [
+        "kv"
+      ],
+      "base_model": "Qwen/Qwen3.5-4B",
+      "files": {
+        "FP16": {
+          "gb": 8.67,
+          "path": "Qwen_Qwen3.5-4B-bf16.gguf",
+          "sha256": "714270d4eb1d336bca9a8dcf0446982e45721be0399d810586a6b82e727dfee5"
+        },
+        "IQ3_M": {
+          "gb": 2.48,
+          "path": "Qwen_Qwen3.5-4B-IQ3_M.gguf",
+          "sha256": "5ad76abae6b7a27d1463d90e6d86886850769e34906a88cfa4347cae72c91502"
+        },
+        "IQ4_XS": {
+          "gb": 2.67,
+          "path": "Qwen_Qwen3.5-4B-IQ4_XS.gguf",
+          "sha256": "628124c61a806897d3f28dcd416be6daff94f62f731eb900d4381875eac9e412"
+        },
+        "Q3_K_M": {
+          "gb": 2.58,
+          "path": "Qwen_Qwen3.5-4B-Q3_K_M.gguf",
+          "sha256": "049c71be191fb980a2851ee4d141f437feb50f001191e9b51bd4f6ab2b04146a"
+        },
+        "Q4_K_M": {
+          "gb": 3.01,
+          "path": "Qwen_Qwen3.5-4B-Q4_K_M.gguf",
+          "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983"
+        },
+        "Q8_0": {
+          "gb": 4.62,
+          "path": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+          "sha256": "5c74c0ede371924357dff0cb6ba145bd67208b9b2389ded681adfff3f7608db7"
+        }
+      },
+      "gguf_repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+      "notes": "",
+      "quant_gaps": {},
+      "revision": "4168f45a16a1290d65a4ec0fa312ae917a4c15d6",
+      "thinking_off": "same mechanism as qwen35_2b",
+      "tier": "small"
+    },
+    "qwen36_27b": {
+      "arms": [],
+      "base_model": "Qwen/Qwen3.6-27B",
+      "files": {
+        "IQ3_M": {
+          "gb": 14.12,
+          "path": "Qwen_Qwen3.6-27B-IQ3_M.gguf",
+          "sha256": "88c5770beb40da56fa21081ca25fa8e033f05ba96a1bff3e7cfc65714c86e74f"
+        },
+        "IQ4_XS": {
+          "gb": 15.78,
+          "path": "Qwen_Qwen3.6-27B-IQ4_XS.gguf",
+          "sha256": "c699518dca347fe11d24dd7906d19d4ecb2935553a3bea1b887761434daa3505"
+        },
+        "Q3_K_M": {
+          "gb": 14.82,
+          "path": "Qwen_Qwen3.6-27B-Q3_K_M.gguf",
+          "sha256": "ab367163bc15ded0051e05acec58de1f2cb78b03168ba58de7ccfb79d3728fe4"
+        },
+        "Q4_K_M": {
+          "gb": 17.98,
+          "path": "Qwen_Qwen3.6-27B-Q4_K_M.gguf",
+          "sha256": "8739a0cbb80036e5dbdced2085f142b8ba86e3235db8b8039b3769fe5fc70843"
+        },
+        "Q8_0": [
+          {
+            "gb": 29.12,
+            "path": "Qwen_Qwen3.6-27B-Q8_0.gguf",
+            "sha256": "aca14ee02bc555ce6703fd0e7d4518c92e731bc3b3d05b1af428fd015c28286f"
+          },
+          {
+            "gb": 3.16,
+            "path": "mtp-Qwen_Qwen3.6-27B-Q8_0.gguf",
+            "sha256": "106fb39ab1cd37373fc54cf9c12b101739aecbbe215725cc0d9dbb25fa495ac4"
+          }
+        ]
+      },
+      "gguf_repo": "bartowski/Qwen_Qwen3.6-27B-GGUF",
+      "notes": "",
+      "quant_gaps": {},
+      "revision": "4612927928b49982f8319dc3e2e6f62b9b73b192",
+      "thinking_off": "hybrid thinking model \u2014 verify on first Colab cell; known GGUF template issues, pin template hash",
+      "tier": "big"
+    },
+    "smollm3_3b": {
+      "arms": [],
+      "base_model": "HuggingFaceTB/SmolLM3-3B",
+      "files": {
+        "FP16": {
+          "gb": 6.16,
+          "path": "HuggingFaceTB_SmolLM3-3B-bf16.gguf",
+          "sha256": "66a39ad173171c36bce86769449f8db61c062689f964a032995976d20b8245f9"
+        },
+        "IQ3_M": {
+          "gb": 1.47,
+          "path": "HuggingFaceTB_SmolLM3-3B-IQ3_M.gguf",
+          "sha256": "ddce138598e1f963e626334658d7a082d65fce70336d82e3e3eb1039c95d72d5"
+        },
+        "IQ4_XS": {
+          "gb": 1.72,
+          "path": "HuggingFaceTB_SmolLM3-3B-IQ4_XS.gguf",
+          "sha256": "342fe3669e6db39bf9b9b514923f2af4a7d6b069efb45cc8f583cfc31cb75553"
+        },
+        "Q3_K_M": {
+          "gb": 1.57,
+          "path": "HuggingFaceTB_SmolLM3-3B-Q3_K_M.gguf",
+          "sha256": "5e5c70fdc3429023ed88ead8af2a70684047e2628258b650bdb729c8437639d0"
+        },
+        "Q4_K_M": {
+          "gb": 1.92,
+          "path": "HuggingFaceTB_SmolLM3-3B-Q4_K_M.gguf",
+          "sha256": "519732558d5fa7420ab058e1b776dcfe73da78013c2fe59c7ca43c325ef89132"
+        },
+        "Q8_0": {
+          "gb": 3.28,
+          "path": "HuggingFaceTB_SmolLM3-3B-Q8_0.gguf",
+          "sha256": "32056df2ec827a1f7c14b6b7f48239fe1d288aba086c811c96a61a8c9df6c733"
+        }
+      },
+      "gguf_repo": "bartowski/HuggingFaceTB_SmolLM3-3B-GGUF",
+      "notes": "",
+      "quant_gaps": {},
+      "revision": "86b3536ed1ca0dcb4716745642db4e6804bf3d32",
+      "thinking_off": "/no_think system-prompt flag \u2014 verified in local probe",
+      "tier": "small"
+    }
+  },
+  "pipeline_version": 2
+}
