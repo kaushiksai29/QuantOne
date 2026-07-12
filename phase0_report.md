@@ -44,7 +44,21 @@ None of the selected repos are abliterated/uncensored.
 | qwen36_27b | bartowski | all 5 big-tier ✅ |
 | gemma4_26b_a4b | bartowski (+google QAT) | all 5 + QAT ✅ |
 
-## ⛔ Decisions needed from you
+## ⛔ Decisions — RESOLVED 2026-07-12 (operator approved "start rolling")
+
+- **D1 → (b)**: phi4_mini from bartowski, **Q8_0 baseline** (v1 Q8≡FP16
+  justification, mirrors big tier). Keeps the imatrix headline complete.
+- **D2 → accepted**: llama32_3b stays on unsloth v1 files, no IQ3_M cell.
+- **D3 → defer to probe**: gemma4_e4b FP16 decided by measured T4 offload.
+- **D4 → confirmed**: gemma4_26b_a4b (MoE) is the big-tier Gemma.
+- **D5 → pin 0.3.33**: operator mandated zero local model execution, so the
+  Windows-wheel CPU incompatibility is moot; newest release wins for Linux.
+- **New (community-research adjustments, 2026-07-12):** every v2 output leads
+  with a sweet-spot table ("at X GB VRAM run Y at Z"); Methods/Limitations
+  explicitly scope out NVFP4/INT4-AutoRound/W4A4 (T4-incompatible) and
+  future-work.md gains an NVFP4 successor-study entry.
+
+## Original decision text (for the record)
 
 - **D1 — phi4_mini source.** unsloth has FP16/Q8/Q4_K_M/Q3_K_M but **zero IQ
   quants**; bartowski has all IQ quants but **no FP16/BF16**.
