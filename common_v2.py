@@ -5,8 +5,10 @@ kv_type), the manifest, and the THOROUGH-v2 knob plan that decides which
 Knob package (thorough v2, approved 2026-07-15):
   - seeds: 3 on tool_decline tasks (the power fix), 2 on structured_output
     and tool_call tasks.
-  - IQ quants (IQ4_XS, IQ3_M) run on the v1-500 subset only; every other
-    quant runs the full 1,200. K-quants/FP16/Q8 are never subset-restricted.
+  - IQ quants (IQ4_XS, IQ3_M) restrict the SCHEMA + TOOL tasks to the v1-500
+    subset (the compute saver), but ALWAYS run the full 200-task decline set —
+    the imatrix-rescues-Q3-decline comparison is v2's headline #1 and must stay
+    powered. Every other quant runs the full 1,200.
   - KV arm: kv_type in {q8_0, q4_0} only for the two KV-arm models at Q4_K_M
     weights; kv_type f16 is the default for all normal cells (so the KV arm's
     f16 condition == the main Q4_K_M run, reused, never regenerated).
@@ -49,7 +51,10 @@ def plan_cells(model_key, quant, kv_type, tasks):
     applying the thorough-v2 knobs. Deterministic order."""
     iq_restricted = quant in IQ_QUANTS
     for task in tasks:
-        if iq_restricted and not is_v1_subset(task["prompt_id"]):
+        # IQ quants: subset-restrict schema+tool only; keep ALL decline tasks
+        # (headline #1 needs the full n=200 decline power at IQ quants too).
+        if (iq_restricted and task["family"] != "tool_decline"
+                and not is_v1_subset(task["prompt_id"])):
             continue
         for seed in range(SEEDS_BY_FAMILY[task["family"]]):
             yield task, seed

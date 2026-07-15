@@ -31,17 +31,19 @@ def test_seed_knob_by_family():
     assert by_pid["decline-0100"] == [0, 1, 2]
 
 
-def test_iq_quant_restricted_to_v1_subset():
+def test_iq_quant_restricts_schema_tool_but_keeps_all_decline():
     cells = list(plan_cells("m", "IQ3_M", "f16", TASKS))
     pids = {t["prompt_id"] for t, _ in cells}
+    # schema + tool: v1-500 subset only
     assert "struct-0000" in pids and "struct-0400" not in pids
     assert "tool-0000" in pids and "tool-0200" not in pids
-    assert "decline-0000" in pids and "decline-0100" not in pids
+    # decline: ALL kept (headline #1 power), incl. the non-subset one
+    assert "decline-0000" in pids and "decline-0100" in pids
 
 
-def test_iq4xs_also_restricted():
+def test_iq4xs_keeps_full_decline():
     pids = {t["prompt_id"] for t, _ in plan_cells("m", "IQ4_XS", "f16", TASKS)}
-    assert pids == {"struct-0000", "tool-0000", "decline-0000"}
+    assert pids == {"struct-0000", "tool-0000", "decline-0000", "decline-0100"}
 
 
 def test_cell_key_includes_kv_type():

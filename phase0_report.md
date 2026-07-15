@@ -133,8 +133,11 @@ the KV-arm dry check.
 
 ## Budget (thorough v2, knobs applied)
 
-Grand total after knobs: **119,450 generations** (small 84,130 + big 19,720 +
-arms 15,600), vs ~213,000 without knobs and 30,000 in v1. At measured tok/s
+Grand total after knobs: **127,100 generations** (small 89,740 + big 21,760 +
+arms 15,600), vs ~213,000 without knobs and 30,000 in v1. (The dry-run gate
+caught that the original IQ-subset knob under-powered the decline metric at IQ
+quants — headline #1 — so IQ quants now keep the full 200-task decline set;
++7,650 gens buys the imatrix-rescue CIs.) At measured tok/s
 scaled for the slower FP16/Q8 cells: ~100–175 GPU-hours ≈ 3–4 weeks across
 Kaggle (small tier + arms) + Colab (big tier).
 
