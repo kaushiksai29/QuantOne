@@ -10,3 +10,4 @@ model_hashes.json
 *.zip
 *.log
 charts/
+.env
