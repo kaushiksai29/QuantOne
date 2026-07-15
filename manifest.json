@@ -53,6 +53,7 @@
       "quant_gaps": {},
       "revision": "fabed3e586120477355eea23b92644540a79ce2f",
       "thinking_off": "n/a",
+      "thinking_off_mechanism": "none",
       "tier": "big"
     },
     "gemma4_e4b": {
@@ -105,6 +106,7 @@
       "quant_gaps": {},
       "revision": "c04cb322fd63e347db759a08b6249b867488ccf8",
       "thinking_off": "n/a (no thinking mode) \u2014 verified in local probe",
+      "thinking_off_mechanism": "none",
       "tier": "small"
     },
     "llama32_3b": {
@@ -144,6 +146,7 @@
       },
       "revision": "e7d0997e49c9cb00d88b4c1a6a16aa894b0bbc31",
       "thinking_off": "n/a",
+      "thinking_off_mechanism": "none",
       "tier": "small"
     },
     "ministral3_3b": {
@@ -186,6 +189,7 @@
       "quant_gaps": {},
       "revision": "0a9035302dea19872c96076896304552890a73c2",
       "thinking_off": "n/a (no thinking mode) \u2014 verified in local probe",
+      "thinking_off_mechanism": "none",
       "tier": "small"
     },
     "phi4_mini": {
@@ -220,6 +224,7 @@
       },
       "revision": "78eb92a46fc37e6b524df991ed9aca9bc6aa7b80",
       "thinking_off": "n/a (no thinking mode)",
+      "thinking_off_mechanism": "none",
       "tier": "small"
     },
     "qwen35_2b": {
@@ -262,6 +267,7 @@
       "quant_gaps": {},
       "revision": "7d26695454df6de5fbcce2e58681e62dae06ce43",
       "thinking_off": "hybrid thinking model \u2014 mechanism verified in local probe",
+      "thinking_off_mechanism": "no_think_system",
       "tier": "small"
     },
     "qwen35_4b": {
@@ -306,6 +312,7 @@
       "quant_gaps": {},
       "revision": "4168f45a16a1290d65a4ec0fa312ae917a4c15d6",
       "thinking_off": "same mechanism as qwen35_2b",
+      "thinking_off_mechanism": "no_think_system",
       "tier": "small"
     },
     "qwen36_27b": {
@@ -350,6 +357,7 @@
       "quant_gaps": {},
       "revision": "4612927928b49982f8319dc3e2e6f62b9b73b192",
       "thinking_off": "hybrid thinking model \u2014 verify on first Colab cell; known GGUF template issues, pin template hash",
+      "thinking_off_mechanism": "no_think_system",
       "tier": "big"
     },
     "smollm3_3b": {
@@ -392,6 +400,7 @@
       "quant_gaps": {},
       "revision": "86b3536ed1ca0dcb4716745642db4e6804bf3d32",
       "thinking_off": "/no_think system-prompt flag \u2014 verified in local probe",
+      "thinking_off_mechanism": "no_think_system",
       "tier": "small"
     }
   },

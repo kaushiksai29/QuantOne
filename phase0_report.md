@@ -100,6 +100,44 @@ None of the selected repos are abliterated/uncensored.
   seeds on schema tasks, IQ quants on the 500-subset only, drop Q8 for some
   models) will likely be needed — decide after probe tok/s lands.
 
+## Phase 0 GPU probe results (Kaggle T4, 2026-07-15)
+
+All 7 small-tier models load under llama-cpp-python 0.3.33, templates apply,
+sha256 verified. tok/s at smallest quant (fastest each will run):
+
+| model | quant | tok/s | thinking-off | json | verdict |
+|---|---|---|---|---|---|
+| qwen35_2b | IQ3_M | 81 | none needed* | 10/10 | OK |
+| llama32_3b | Q3_K_M | 70 | none | 10/10 | OK |
+| smollm3_3b | IQ3_M | 59 | /no_think system | 10/10 | OK |
+| ministral3_3b | IQ3_M | 55 | none | 10/10 | OK |
+| phi4_mini | Q3_K_M | 54 | none | 10/10 | OK |
+| gemma4_e4b | IQ3_M | 39 | none | 10/10 | OK |
+| qwen35_4b | IQ3_M | 47 | **needs /no_think** | 0/10 raw → fixed | see below |
+
+*qwen35_2b probed clean without /no_think, but per the plan's protocol
+mandate both Qwen3.5 models use `/no_think` (mechanism recorded in manifest);
+harmless where already clean.
+
+**qwen35_4b finding:** the initial probe's single-task auto-discovery gave a
+false "none needed"; across all 10 tasks it leaked reasoning and produced
+0/10 JSON. It is a hybrid thinking model; `/no_think` is the documented
+disable (same as smollm3). Manifest `thinking_off_mechanism` = no_think_system
+for both Qwen3.5 models; the runner enforces it; the Phase 3 dry run will use
+**qwen35_4b** (not 2b) to confirm the fix on the risky model.
+
+**Gemma KV note:** gemma4_e4b logs SWA/full-V-cache padding and "FA not
+enabled". The v2 runner enables flash_attn automatically when kv_type != f16
+(KV arm), which is required for q4_0/q8_0 KV cache on this arch — flagged for
+the KV-arm dry check.
+
+## Budget (thorough v2, knobs applied)
+
+Grand total after knobs: **119,450 generations** (small 84,130 + big 19,720 +
+arms 15,600), vs ~213,000 without knobs and 30,000 in v1. At measured tok/s
+scaled for the slower FP16/Q8 cells: ~100–175 GPU-hours ≈ 3–4 weeks across
+Kaggle (small tier + arms) + Colab (big tier).
+
 ## Next actions
 
 1. You: push the `v2` branch (GitHub Desktop), then run

@@ -1,0 +1,25 @@
+# QuantOne v2 — FROZEN gen config (rule 3). Model files + hashes live in
+# manifest.json (Phase 0, SHA-256 pinned). This holds only the non-file,
+# non-model configuration shared across every cell.
+
+pipeline_version: 2
+
+# Frozen generation config, identical to v1 for comparability.
+gen_config:
+  temperature: 0
+  max_tokens: 512
+  seed: null          # set per-run by the runner
+
+# Thorough-v2 knob package (approved 2026-07-15). The seed/subset logic is
+# implemented in common_v2.plan_cells; these values document + drive it.
+knobs:
+  seeds_by_family: {tool_decline: 3, structured_output: 2, tool_call: 2}
+  iq_quants_on_v1_subset_only: true
+
+# KV-cache arm.
+kv_arm:
+  models: [qwen35_4b, gemma4_e4b]
+  weight_quant: Q4_K_M
+  cache_types: [q8_0, q4_0]   # f16 reuses the main Q4_K_M run
+
+tasks_file: tasks/tasks_v2.jsonl
